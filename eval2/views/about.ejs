@@ -9,28 +9,54 @@
     <script src="/js/about.js" defer></script>
 
     <style>
+        :root {
+            --teal: #14FFEC;
+            --dark-bg: #0F0F0F;
+            --font-main: 'Poppins', 'Segoe UI', sans-serif;
+            --fade-teal: rgba(20, 255, 236, 0.1);
+        }
+    
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+    
+        html, body {
+            height: 100%;
+            width: 100%;
+            font-family: var(--font-main);
+            background-color: var(--dark-bg);
+            color: #fff;
+            overflow-x: hidden;
+        }
+    
         .scrolling-text-bg {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: -10;
-            pointer-events: none; 
+            pointer-events: none;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: flex-start;
             white-space: nowrap;
-            overflow: hidden;
+            opacity: 0.2;
         }
-
+    
         .scrolling-text-bg span {
-            animation: scroll-text 30s linear infinite;
+            animation: scroll-text 40s linear infinite;
             display: inline-block;
-            margin: 0 2rem; 
+            margin: 0 3rem;
+            font-weight: 700;
             color: var(--teal);
+            text-shadow: 0 0 10px var(--fade-teal);
+            mix-blend-mode: screen;
         }
-
+    
         @keyframes scroll-text {
             0% {
                 transform: translateX(100%);
@@ -39,14 +65,95 @@
                 transform: translateX(-100%);
             }
         }
-
-        .text-large { font-size: 6rem; opacity: 0.15; }
-        .text-medium { font-size: 4rem; opacity: 0.3; }
-        .text-small { font-size: 2rem; opacity: 0.2; }
+    
+        .text-large {
+            font-size: 6rem;
+            opacity: 0.08;
+        }
+    
+        .text-medium {
+            font-size: 4.5rem;
+            opacity: 0.12;
+        }
+    
+        .text-small {
+            font-size: 2.5rem;
+            opacity: 0.15;
+        }
+    
+        .container {
+            padding: 1rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+    
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--teal);
+            font-size: 1.25rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+        }
+    
+        .back-link:hover {
+            color: #0ff;
+            border-color: #0ff;
+            background-color: rgba(20, 255, 236, 0.1);
+        }
+    
+        .back-link img {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+    
+        .back-link:hover img {
+            transform: translateX(-5px);
+        }
+    
+        .bot {
+            text-align: center;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-top: 4rem;
+            color: var(--teal);
+            text-shadow: 0 0 12px rgba(20, 255, 236, 0.3);
+            letter-spacing: 1.5px;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+            word-wrap: break-word;
+        }
+    
+        @media (max-width: 768px) {
+            .text-large { font-size: 3.5rem; }
+            .text-medium { font-size: 2.5rem; }
+            .text-small { font-size: 1.5rem; }
+            .bot { font-size: 2.5rem; padding: 1rem; }
+        }
     </style>
-</head>
+    
+
+
+
+    </head>
 
 <body>
+
+    <div class="scrolling-text-bg">
+    <span class="text-large">Creative Minds</span>
+    <span class="text-medium">Innovate</span>
+    <span class="text-small">Code. Build. Repeat.</span>
+    <!-- repeat or animate via JS -->
+</div>
+
+    
     <div class="scrolling-text-bg"></div>
 
     <div class="container mt-3">

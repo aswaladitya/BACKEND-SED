@@ -128,7 +128,7 @@
     <!--div id="header">
         <h1>Cozy Wave</h1>
     </div-->
-
+ 
     <div class="container my-5">
         <!-- Filters Section -->
         <div class="row filter-section mb-4">
@@ -152,113 +152,35 @@
             </div>
         </div>
 
+        
+
+
+        <!-- ADDING EJS DELIMITERS HERE -->
+
+
         <!-- Room List -->
         <div class="row" id="room-list">
-            <div class="col-md-4 mb-4 room-card" data-price="250" data-rating="4" onclick="navigateToHotel('hotelr.html')">
-                <img class="room-image" src="image copy 4.png" alt="Room Image">
-                <div class="room-title">Hotel R</div>
+            <% hotels.forEach(hotel => { %>
+              <div class="col-md-4 mb-4 room-card" 
+                   data-price="<%= hotel.price %>" 
+                   data-rating="<%= hotel.rating %>" 
+                   onclick="navigateToHotel('<%= hotel.link %>')">
+                <img class="room-image" src="<%= hotel.image %>" alt="Room Image">
+                <div class="room-title"><%= hotel.name %></div>
                 <div class="room-rating">
+                  <% for (let i = 0; i < hotel.rating; i++) { %>
                     <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                  <% } %>
                 </div>
-            </div>
+              </div>
+            <% }) %>
+          </div>
+          
 
-            <div class="col-md-4 mb-4 room-card" data-price="450" data-rating="5" onclick="navigateToHotel('hotela.html')">
-                <img class="room-image" src="image copy 3.png" alt="Room Image">
-                <div class="room-title">Hotel A</div>
-                <div class="room-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-            </div>
+           
 
-            <div class="col-md-4 mb-4 room-card" data-price="1200" data-rating="5" onclick="navigateToHotel('hotelb.html')">
-                <img class="room-image" src="image copy 2.png" alt="Room Image">
-                <div class="room-title">Hotel B</div>
-                <div class="room-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-            </div>
 
-            <div class="col-md-4 mb-4 room-card" data-price="300" data-rating="3" onclick="navigateToHotel('hotelc.html')">
-                <img class="room-image" src="image.png" alt="Room Image">
-                <div class="room-title">Hotel C</div>
-                <div class="room-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4 room-card" data-price="1500" data-rating="5" onclick="navigateToHotel('hotele.html')">
-                <img class="room-image" src="image copy.png" alt="Room Image">
-                <div class="room-title">Hotel E</div>
-                <div class="room-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-            </div>
-
-            <!-- New Rooms -->
-            <div class="col-md-4 mb-4 room-card" data-price="550" data-rating="4" onclick="navigateToHotel('hotelf.html')">
-                <img class="room-image" src="image copy 5.png" alt="Room Image">
-                <div class="room-title">Hotel F</div>
-                <div class="room-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4 room-card" data-price="700" data-rating="5" onclick="navigateToHotel('hotelg.html')">
-                <img class="room-image" src="image copy 6.png" alt="Room Image">
-                <div class="room-title">Hotel G</div>
-                <div class="room-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4 room-card" data-price="1800" data-rating="5" onclick="navigateToHotel('hotelh.html')">
-                <img class="room-image" src="image copy 7.png" alt="Room Image">
-                <div class="room-title">Hotel H</div>
-                <div class="room-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4 room-card" data-price="400" data-rating="3" onclick="navigateToHotel('hoteli.html')">
-                <img class="room-image" src="image copy 8.png" alt="Room Image">
-                <div class="room-title">Hotel I</div>
-                <div class="room-rating">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    
     <!-- Footer -->
     <div class="footer">
         <div class="container">

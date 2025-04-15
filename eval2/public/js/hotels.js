@@ -36,3 +36,6 @@ function navigateHome() {
 function navigateToHotel(hotelPage) {
     window.location.assign(hotelPage)
 }
+
+
+

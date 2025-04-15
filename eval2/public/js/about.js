@@ -31,12 +31,23 @@ const aboutUsText = [
     { text: 'They found the key. The lock is still unknown.', className: 'text-medium' },  
     { text: 'You were meant to read this.', className: 'text-small' }  
   
-
 ]
 
 
 let totalHeight = 0
 const margin = 8 
+
+
+
+// Example: JS snippet to add scrolling text
+const scrollingContainer = document.querySelector(".scrolling-text-bg");
+['We love code', 'Our mission is innovation', 'Join us today'].forEach((text, i) => {
+    const span = document.createElement("span");
+    span.className = ['text-large', 'text-medium', 'text-small'][i % 3];
+    span.textContent = text;
+    scrollingContainer.appendChild(span);
+});
+
 
 while (totalHeight < viewportHeight * 10) { 
     aboutUsText.forEach(({ text, className }) => {
