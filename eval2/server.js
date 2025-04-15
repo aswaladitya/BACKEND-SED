@@ -13,16 +13,14 @@ const Routes = require('./routes')
 
 
 app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'views')) // if 'views' is outside 'public'
+app.set('views', path.join(__dirname, 'views')) 
 
 
 
-
+app.use(express.urlencoded({ extended: true })) 
 app.use(morgan('dev')) 
 app.use(cors()) 
 app.use(helmet()) 
-app.use(express.json()) 
-app.use(express.urlencoded({ extended: true })) 
 app.use(cookieParser()) 
 app.use(bodyParser.json())
 
