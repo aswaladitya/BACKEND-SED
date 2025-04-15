@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="/css/godfather.css">
+    <link rel="icon" href="/stuff/icon/library_books_24dp_14FFEC_FILL0_wght400_GRAD0_opsz24.svg">
+    <script src="/js/about.js" defer></script>
+
+    <style>
+        .scrolling-text-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            pointer-events: none; 
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .scrolling-text-bg span {
+            animation: scroll-text 30s linear infinite;
+            display: inline-block;
+            margin: 0 2rem; 
+            color: var(--teal);
+        }
+
+        @keyframes scroll-text {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .text-large { font-size: 6rem; opacity: 0.15; }
+        .text-medium { font-size: 4rem; opacity: 0.3; }
+        .text-small { font-size: 2rem; opacity: 0.2; }
+    </style>
+</head>
+
+<body>
+    <div class="scrolling-text-bg"></div>
+
+    <div class="container mt-3">
+        <a href="/" class="back-link">
+            Back
+            <img src="/stuff/icon/undo_teal.svg" alt="Back Icon">
+        </a>
+    </div>
+
+    <div class="bot">About</div>
+</body>
+</html>

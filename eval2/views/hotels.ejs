@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Rooms & Prices</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/hotels.js" defer></script>
+    <style>
+        :root {
+    --black: #000000;
+    --gray: #323232;
+    --teal: #0D7377;
+    --aqua: #14FFEC;
+}
+        body {
+            background-color: #000;
+            color: white;
+            padding: 0;
+        }
+        
+.back-link {
+    color: var(--teal) !important;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: color 0.3s, text-decoration 0.3s;
+    position: absolute;
+    top: 1px;
+    right: 5px;
+}
+
+.back-link:hover {
+    color: var(--aqua)!important;
+    text-decoration: underline;
+}
+/*
+.back-link:visited {
+    color: var(--gray);
+}*/
+
+.back-link img {
+    margin-top: 4px;
+    margin-right: 8px;
+    width: 20px;
+    height: 20px;
+    transition: content 0.3s;
+}
+.back-link:hover img {
+    content: url('/stuff/icon/undo_aqua.svg');
+}
+
+.back-link:visited img {
+    content: url('/stuff/icon/undo_gray.svg');
+}
+        #header {
+            background-color: #111;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        #header h1 {
+            font-family: 'Georgia', serif;
+            font-size: 6rem;
+        }
+
+        .room-card {
+            background-color: #222;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .room-card:hover {
+            transform: scale(1.05);
+        }
+
+        .room-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .room-title {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .room-price {
+            font-size: 1.2rem;
+            color: #FFD700;
+        }
+
+        .room-rating i {
+            color: gold;
+        }
+
+        .filter-section select,
+        .filter-section input {
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            border: 1px solid #444;
+        }
+
+        .footer {
+            background-color: #111;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">
+        Back
+        <img src="/stuff/icon/undo_teal.svg" alt="Back Icon">
+    </a>
+
+
+    <!--div id="header">
+        <h1>Cozy Wave</h1>
+    </div-->
+
+    <div class="container my-5">
+        <!-- Filters Section -->
+        <div class="row filter-section mb-4">
+            <div class="col-md-6 mb-3">
+                <label for="price-filter" class="form-label">Price Range:</label>
+                <div class="d-flex gap-2">
+                    <input type="number" id="min-price" class="form-control" placeholder="Min Price" min="0">
+                    <input type="number" id="max-price" class="form-control" placeholder="Max Price" min="0">
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="rating-filter" class="form-label">Minimum Rating:</label>
+                <select id="rating-filter" class="form-select">
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Room List -->
+        <div class="row" id="room-list">
+            <div class="col-md-4 mb-4 room-card" data-price="250" data-rating="4" onclick="navigateToHotel('hotelr.html')">
+                <img class="room-image" src="image copy 4.png" alt="Room Image">
+                <div class="room-title">Hotel R</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4 room-card" data-price="450" data-rating="5" onclick="navigateToHotel('hotela.html')">
+                <img class="room-image" src="image copy 3.png" alt="Room Image">
+                <div class="room-title">Hotel A</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4 room-card" data-price="1200" data-rating="5" onclick="navigateToHotel('hotelb.html')">
+                <img class="room-image" src="image copy 2.png" alt="Room Image">
+                <div class="room-title">Hotel B</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4 room-card" data-price="300" data-rating="3" onclick="navigateToHotel('hotelc.html')">
+                <img class="room-image" src="image.png" alt="Room Image">
+                <div class="room-title">Hotel C</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4 room-card" data-price="1500" data-rating="5" onclick="navigateToHotel('hotele.html')">
+                <img class="room-image" src="image copy.png" alt="Room Image">
+                <div class="room-title">Hotel E</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+
+            <!-- New Rooms -->
+            <div class="col-md-4 mb-4 room-card" data-price="550" data-rating="4" onclick="navigateToHotel('hotelf.html')">
+                <img class="room-image" src="image copy 5.png" alt="Room Image">
+                <div class="room-title">Hotel F</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4 room-card" data-price="700" data-rating="5" onclick="navigateToHotel('hotelg.html')">
+                <img class="room-image" src="image copy 6.png" alt="Room Image">
+                <div class="room-title">Hotel G</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4 room-card" data-price="1800" data-rating="5" onclick="navigateToHotel('hotelh.html')">
+                <img class="room-image" src="image copy 7.png" alt="Room Image">
+                <div class="room-title">Hotel H</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4 room-card" data-price="400" data-rating="3" onclick="navigateToHotel('hoteli.html')">
+                <img class="room-image" src="image copy 8.png" alt="Room Image">
+                <div class="room-title">Hotel I</div>
+                <div class="room-rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>About Cozy Wave</h5>
+                    <p>Cozy Wave is a luxurious hotel offering the best services and amenities to make your stay memorable.</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Contact Us</h5>
+                    <p>Email: contact@cozywave.com</p>
+                    <p>Phone: +123 456 7890</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+
+    
+
+</body>
+</html>

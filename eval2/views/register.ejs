@@ -1,0 +1,30 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+        <link rel="stylesheet" href="/public/css/godfather.css">
+        <link rel="icon" href="/public/stuff/icon/login_24dp_14FFEC_FILL0_wght400_GRAD0_opsz24.svg">
+    </head>
+<body>
+    <div class="container mt-3">
+        <a href="/" class="back-link">
+            Back
+            <img src="/public/stuff/icon/undo_teal.svg" alt="Back Icon">
+        </a>
+    </div>
+    <div class="meh">
+    <form action="/register" method="POST">
+        <p>Invalid username or password. Please register.</p>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Register</button>
+    </form>
+    </div>
+    <div class="bot">Register</div>
+</body>
+</html>

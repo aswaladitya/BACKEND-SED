@@ -1,0 +1,44 @@
+const express = require('express')
+const path = require('path')
+
+const morgan = require('morgan')
+const cors = require('cors')
+const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+
+const app = express()
+const PORT = 8080
+const Routes = require('./routes')
+
+
+app.set('view engine', 'ejs')
+app.set('views', path.join(__dirname, 'views')) // if 'views' is outside 'public'
+
+
+
+
+app.use(morgan('dev')) 
+app.use(cors()) 
+app.use(helmet()) 
+app.use(express.json()) 
+app.use(express.urlencoded({ extended: true })) 
+app.use(cookieParser()) 
+app.use(bodyParser.json())
+
+
+
+app.use(express.static(path.join(__dirname, 'public')))
+app.use('/', Routes)
+
+
+
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).json({ error: 'Something went wrong!' })
+})
+
+
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`)
+})
