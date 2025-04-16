@@ -382,61 +382,52 @@
         <div class="row" id="room-list">
             <% const hotels = [
                 {
-                    name: "Luxury Suite",
+                    name: "Hotel A",
                     price: 5999,
                     rating: 5,
                     image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-                    link: "/hotel/luxury-suite",
-                    features: ["WiFi", "Pool", "Spa", "Restaurant"]
+                    link: "/hotela"
                 },
                 {
-                    name: "Deluxe Room",
+                    name: "Hotel B",
                     price: 3499,
                     rating: 4,
                     image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-                    link: "/hotel/deluxe-room",
-                    features: ["WiFi", "Parking", "Breakfast"]
+                    link: "/hotelb"
                 },
                 {
-                    name: "Standard Room",
+                    name: "Hotel C",
                     price: 2599,
                     rating: 3,
                     image: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-                    link: "/hotel/standard-room",
-                    features: ["WiFi", "TV"]
+                    link: "/hotelc"
                 },
                 {
-                    name: "Presidential Suite",
+                    name: "Hotel E",
                     price: 8999,
                     rating: 5,
                     image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bHV4dXJ5JTIwaG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-                    link: "/hotel/presidential-suite",
-                    features: ["WiFi", "Private Pool", "Mini Bar", "24/7 Service"]
+                    link: "/hotele"
                 },
                 {
-                    name: "Economy Room",
+                    name: "Hotel F",
                     price: 1999,
                     rating: 2,
                     image: "https://images.unsplash.com/photo-1599619351208-3e6c839d6828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
-                    link: "/hotel/economy-room",
-                    features: ["WiFi", "AC"]
+                    link: "/hotelf"
                 },
                 {
-                    name: "Family Suite",
+                    name: "Hotel G",
                     price: 4599,
                     rating: 4,
                     image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdGVsJTIwcm9vbXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
-                    link: "/hotel/family-suite",
-                    features: ["WiFi", "Parking", "Kid Friendly", "Game Room"]
+                    link: "/hotelg"
                 }
             ]; %>
-            
+
             <% hotels.forEach(hotel => { %>
                 <div class="col-md-4 mb-4">
-                    <div class="room-card" 
-                         data-price="<%= hotel.price %>" 
-                         data-rating="<%= hotel.rating %>" 
-                         onclick="navigateToHotel('<%= hotel.link %>')">
+                    <div class="room-card" onclick="navigateToHotel('<%= hotel.link %>')">
                         <img class="room-image" src="<%= hotel.image %>" alt="<%= hotel.name %>">
                         <div class="room-title"><%= hotel.name %></div>
                         <div class="room-price"><%= hotel.price %></div>
@@ -447,24 +438,6 @@
                             <% for (let i = hotel.rating; i < 5; i++) { %>
                                 <i class="far fa-star"></i>
                             <% } %>
-                        </div>
-                        <div class="room-features">
-                            <% hotel.features.forEach(feature => { %>
-                                <% let icon = 'check'; %>
-                                <% if (feature === 'WiFi') icon = 'wifi'; %>
-                                <% if (feature === 'Parking') icon = 'parking'; %>
-                                <% if (feature === 'Pool' || feature === 'Private Pool') icon = 'swimming-pool'; %>
-                                <% if (feature === 'Spa') icon = 'spa'; %>
-                                <% if (feature === 'Restaurant') icon = 'utensils'; %>
-                                <% if (feature === 'Breakfast') icon = 'coffee'; %>
-                                <% if (feature === 'TV') icon = 'tv'; %>
-                                <% if (feature === 'Mini Bar') icon = 'glass-martini-alt'; %>
-                                <% if (feature === '24/7 Service') icon = 'concierge-bell'; %>
-                                <% if (feature === 'AC') icon = 'fan'; %>
-                                <% if (feature === 'Kid Friendly') icon = 'baby'; %>
-                                <% if (feature === 'Game Room') icon = 'gamepad'; %>
-                                <span class="feature-tag"><i class="fas fa-<%= icon %> me-1"></i><%= feature %></span>
-                            <% }); %>
                         </div>
                     </div>
                 </div>
