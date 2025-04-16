@@ -6,133 +6,346 @@
     <title>Hotel Rooms & Prices</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for better icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="/js/hotels.js" defer></script>
     <style>
         :root {
-    --black: #000000;
-    --gray: #323232;
-    --teal: #0D7377;
-    --aqua: #14FFEC;
-}
+            --black: #000000;
+            --gray: #323232;
+            --teal: #0D7377;
+            --aqua: #14FFEC;
+        }
+        
         body {
             background-color: #000;
             color: white;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
-.back-link {
-    color: var(--teal) !important;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    font-size: 1.2rem;
-    transition: color 0.3s, text-decoration 0.3s;
-    position: absolute;
-    top: 1px;
-    right: 5px;
-}
+        .back-link {
+            color: var(--teal) !important;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.2rem;
+            transition: color 0.3s, text-decoration 0.3s;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background-color: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(5px);
+        }
 
-.back-link:hover {
-    color: var(--aqua)!important;
-    text-decoration: underline;
-}
-/*
-.back-link:visited {
-    color: var(--gray);
-}*/
+        .back-link:hover {
+            color: var(--aqua)!important;
+            text-decoration: underline;
+        }
 
-.back-link img {
-    margin-top: 4px;
-    margin-right: 8px;
-    width: 20px;
-    height: 20px;
-    transition: content 0.3s;
-}
-.back-link:hover img {
-    content: url('/stuff/icon/undo_aqua.svg');
-}
+        .back-link img {
+            margin-top: 4px;
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+            transition: content 0.3s;
+        }
+        .back-link:hover img {
+            content: url('/stuff/icon/undo_aqua.svg');
+        }
 
-.back-link:visited img {
-    content: url('/stuff/icon/undo_gray.svg');
-}
+        .back-link:visited img {
+            content: url('/stuff/icon/undo_gray.svg');
+        }
+
         #header {
             background-color: #111;
             color: white;
-            padding: 2rem;
+            padding: 4rem 2rem;
             text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--teal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #header:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(13, 115, 119, 0.2), transparent);
+            z-index: 1;
         }
 
         #header h1 {
             font-family: 'Georgia', serif;
             font-size: 6rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 15px rgba(20, 255, 236, 0.5);
         }
 
         .room-card {
-            background-color: #222;
-            border-radius: 10px;
-            padding: 1rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease;
+            background-color: #151515;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            height: 100%;
+            border: 1px solid #222;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .room-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(20, 255, 236, 0.2);
+            border-color: var(--teal);
         }
 
         .room-image {
             width: 100%;
-            height: 200px;
+            height: 220px;
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 1rem;
+            transition: all 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .room-card:hover .room-image {
+            transform: scale(1.05);
         }
 
         .room-title {
             font-size: 1.5rem;
             margin: 1rem 0;
+            font-weight: 600;
+            color: var(--aqua);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .room-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--teal);
+            transition: width 0.3s ease;
+        }
+
+        .room-card:hover .room-title:after {
+            width: 80px;
         }
 
         .room-price {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #FFD700;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .room-price::before {
+            content: '₹';
+            font-size: 1rem;
+        }
+
+        .room-rating {
+            margin: 10px 0;
         }
 
         .room-rating i {
             color: gold;
+            margin-right: 2px;
+            text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .filter-section {
+            background-color: #151515;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #222;
+        }
+
+        .filter-section h4 {
+            color: var(--aqua);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        .filter-section h4:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--teal);
         }
 
         .filter-section select,
         .filter-section input {
-            background-color: #333;
+            background-color: #222;
             color: white;
-            border-radius: 5px;
-            border: 1px solid #444;
+            border-radius: 10px;
+            border: 1px solid #333;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .filter-section select:focus,
+        .filter-section input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(13, 115, 119, 0.25);
+            outline: none;
         }
 
         .footer {
             background-color: #111;
             color: white;
-            padding: 1rem;
+            padding: 3rem 2rem;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 4rem;
+            border-top: 3px solid var(--teal);
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--aqua), transparent);
+        }
+
+        .footer h5 {
+            color: var(--aqua);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .footer h5:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background-color: var(--teal);
+        }
+
+        .footer p {
+            color: #ccc;
+            margin-bottom: 5px;
+        }
+
+        /* Animation for room cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .room-card {
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .room-features {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .feature-tag {
+            background-color: rgba(13, 115, 119, 0.2);
+            color: var(--aqua);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Button styles */
+        .btn-filter {
+            background-color: var(--teal);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-filter:hover {
+            background-color: var(--aqua);
+            color: #222;
+            transform: translateY(-2px);
+        }
+
+        .btn-reset {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-reset:hover {
+            background-color: #555;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
     <a href="/" class="back-link">
-        Back
-        <img src="/stuff/icon/undo_teal.svg" alt="Back Icon">
+        <i class="fas fa-arrow-left me-2"></i> Back
     </a>
 
-
-    <!--div id="header">
-        <h1>Cozy Wave</h1>
-    </div-->
- 
     <div class="container my-5">
+        <!-- Header Section -->
+        <div id="header" class="mb-5">
+            <h1>Cozy Wave</h1>
+            <p class="lead">Discover your perfect stay with exceptional comfort and luxury</p>
+        </div>
+        
         <!-- Filters Section -->
         <div class="row filter-section mb-4">
-            <div class="col-md-6 mb-3">
+            <div class="col-12 mb-3">
+                <h4><i class="fas fa-filter me-2"></i>Filter Options</h4>
+            </div>
+            <div class="col-md-4 mb-3">
                 <label for="price-filter" class="form-label">Price Range:</label>
                 <div class="d-flex gap-2">
                     <input type="number" id="min-price" class="form-control" placeholder="Min Price" min="0">
@@ -140,7 +353,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mb-3">
+            <div class="col-md-4 mb-3">
                 <label for="rating-filter" class="form-label">Minimum Rating:</label>
                 <select id="rating-filter" class="form-select">
                     <option value="1">1 Star</option>
@@ -150,49 +363,140 @@
                     <option value="5">5 Stars</option>
                 </select>
             </div>
+
+            <div class="col-md-4 mb-3 d-flex align-items-end">
+                <div class="d-flex gap-2 w-100">
+                    <button id="apply-filters" class="btn-filter flex-grow-1">
+                        <i class="fas fa-search me-2"></i>Apply Filters
+                    </button>
+                    <button id="reset-filters" class="btn-reset">
+                        <i class="fas fa-undo me-2"></i>Reset
+                    </button>
+                </div>
+            </div>
         </div>
-
-        
-
 
         <!-- ADDING EJS DELIMITERS HERE -->
 
-
         <!-- Room List -->
         <div class="row" id="room-list">
+            <% const hotels = [
+                {
+                    name: "Luxury Suite",
+                    price: 5999,
+                    rating: 5,
+                    image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+                    link: "/hotel/luxury-suite",
+                    features: ["WiFi", "Pool", "Spa", "Restaurant"]
+                },
+                {
+                    name: "Deluxe Room",
+                    price: 3499,
+                    rating: 4,
+                    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+                    link: "/hotel/deluxe-room",
+                    features: ["WiFi", "Parking", "Breakfast"]
+                },
+                {
+                    name: "Standard Room",
+                    price: 2599,
+                    rating: 3,
+                    image: "https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+                    link: "/hotel/standard-room",
+                    features: ["WiFi", "TV"]
+                },
+                {
+                    name: "Presidential Suite",
+                    price: 8999,
+                    rating: 5,
+                    image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8bHV4dXJ5JTIwaG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+                    link: "/hotel/presidential-suite",
+                    features: ["WiFi", "Private Pool", "Mini Bar", "24/7 Service"]
+                },
+                {
+                    name: "Economy Room",
+                    price: 1999,
+                    rating: 2,
+                    image: "https://images.unsplash.com/photo-1599619351208-3e6c839d6828?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60",
+                    link: "/hotel/economy-room",
+                    features: ["WiFi", "AC"]
+                },
+                {
+                    name: "Family Suite",
+                    price: 4599,
+                    rating: 4,
+                    image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fGhvdGVsJTIwcm9vbXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
+                    link: "/hotel/family-suite",
+                    features: ["WiFi", "Parking", "Kid Friendly", "Game Room"]
+                }
+            ]; %>
+            
             <% hotels.forEach(hotel => { %>
-              <div class="col-md-4 mb-4 room-card" 
-                   data-price="<%= hotel.price %>" 
-                   data-rating="<%= hotel.rating %>" 
-                   onclick="navigateToHotel('<%= hotel.link %>')">
-                <img class="room-image" src="<%= hotel.image %>" alt="Room Image">
-                <div class="room-title"><%= hotel.name %></div>
-                <div class="room-rating">
-                  <% for (let i = 0; i < hotel.rating; i++) { %>
-                    <i class="fa fa-star"></i>
-                  <% } %>
+                <div class="col-md-4 mb-4">
+                    <div class="room-card" 
+                         data-price="<%= hotel.price %>" 
+                         data-rating="<%= hotel.rating %>" 
+                         onclick="navigateToHotel('<%= hotel.link %>')">
+                        <img class="room-image" src="<%= hotel.image %>" alt="<%= hotel.name %>">
+                        <div class="room-title"><%= hotel.name %></div>
+                        <div class="room-price"><%= hotel.price %></div>
+                        <div class="room-rating">
+                            <% for (let i = 0; i < hotel.rating; i++) { %>
+                                <i class="fas fa-star"></i>
+                            <% } %>
+                            <% for (let i = hotel.rating; i < 5; i++) { %>
+                                <i class="far fa-star"></i>
+                            <% } %>
+                        </div>
+                        <div class="room-features">
+                            <% hotel.features.forEach(feature => { %>
+                                <% let icon = 'check'; %>
+                                <% if (feature === 'WiFi') icon = 'wifi'; %>
+                                <% if (feature === 'Parking') icon = 'parking'; %>
+                                <% if (feature === 'Pool' || feature === 'Private Pool') icon = 'swimming-pool'; %>
+                                <% if (feature === 'Spa') icon = 'spa'; %>
+                                <% if (feature === 'Restaurant') icon = 'utensils'; %>
+                                <% if (feature === 'Breakfast') icon = 'coffee'; %>
+                                <% if (feature === 'TV') icon = 'tv'; %>
+                                <% if (feature === 'Mini Bar') icon = 'glass-martini-alt'; %>
+                                <% if (feature === '24/7 Service') icon = 'concierge-bell'; %>
+                                <% if (feature === 'AC') icon = 'fan'; %>
+                                <% if (feature === 'Kid Friendly') icon = 'baby'; %>
+                                <% if (feature === 'Game Room') icon = 'gamepad'; %>
+                                <span class="feature-tag"><i class="fas fa-<%= icon %> me-1"></i><%= feature %></span>
+                            <% }); %>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            <% }) %>
-          </div>
-          
+            <% }); %>
+        </div>
 
-           
-
-
-    
-    <!-- Footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>About Cozy Wave</h5>
-                    <p>Cozy Wave is a luxurious hotel offering the best services and amenities to make your stay memorable.</p>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>About Cozy Wave</h5>
+                        <p>Cozy Wave is a luxurious hotel offering the best services and amenities to make your stay memorable.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Contact Us</h5>
+                        <p><i class="fas fa-envelope me-2"></i>contact@cozywave.com</p>
+                        <p><i class="fas fa-phone me-2"></i>+123 456 7890</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Follow Us</h5>
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <a href="#" style="color: var(--teal); font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                            <a href="#" style="color: var(--teal); font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                            <a href="#" style="color: var(--teal); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <h5>Contact Us</h5>
-                    <p>Email: contact@cozywave.com</p>
-                    <p>Phone: +123 456 7890</p>
+                <div class="row mt-4">
+                    <div class="col-12 text-center">
+                        <p>© 2025 Cozy Wave. All rights reserved.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -201,7 +505,52 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
 
-    
+    <script>
+        // Function to navigate to hotel detail page
+        function navigateToHotel(link) {
+            window.location.href = link;
+        }
 
+        // Filter functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const applyFiltersBtn = document.getElementById('apply-filters');
+            const resetFiltersBtn = document.getElementById('reset-filters');
+            const minPriceInput = document.getElementById('min-price');
+            const maxPriceInput = document.getElementById('max-price');
+            const ratingFilter = document.getElementById('rating-filter');
+            const roomList = document.getElementById('room-list');
+            const roomCards = roomList.querySelectorAll('.room-card');
+
+            applyFiltersBtn.addEventListener('click', function() {
+                const minPrice = parseInt(minPriceInput.value) || 0;
+                const maxPrice = parseInt(maxPriceInput.value) || Infinity;
+                const minRating = parseInt(ratingFilter.value) || 1;
+
+                roomCards.forEach(card => {
+                    const cardPrice = parseInt(card.getAttribute('data-price'));
+                    const cardRating = parseInt(card.getAttribute('data-rating'));
+                    
+                    const priceMatch = cardPrice >= minPrice && (maxPrice === Infinity || cardPrice <= maxPrice);
+                    const ratingMatch = cardRating >= minRating;
+                    
+                    if (priceMatch && ratingMatch) {
+                        card.parentElement.style.display = 'block';
+                    } else {
+                        card.parentElement.style.display = 'none';
+                    }
+                });
+            });
+
+            resetFiltersBtn.addEventListener('click', function() {
+                minPriceInput.value = '';
+                maxPriceInput.value = '';
+                ratingFilter.value = '1';
+                
+                roomCards.forEach(card => {
+                    card.parentElement.style.display = 'block';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
