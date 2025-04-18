@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Famous Cities</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for better icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/js/hotels.js" defer></script>
+    <style>
+        /* Same styles as hotels.ejs */
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">
+        <i class="fas fa-arrow-left me-2"></i> Back
+    </a>
+
+    <div class="container my-5">
+        <!-- Header Section -->
+        <div id="header" class="mb-5">
+            <h1>Famous Cities</h1>
+            <p class="lead">Explore the most iconic cities around the world</p>
+        </div>
+
+        <!-- City List -->
+        <div class="row" id="city-list">
+            <% const cities = [
+                {
+                    name: "New York",
+                    description: "The city that never sleeps, known for its skyline and cultural diversity.",
+                    image: "https://images.unsplash.com/photo-1549921296-3a6b8b4b1b9b",
+                    link: "/new-york"
+                },
+                {
+                    name: "Paris",
+                    description: "The city of love, famous for the Eiffel Tower and its art museums.",
+                    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34",
+                    link: "/paris"
+                },
+                {
+                    name: "Tokyo",
+                    description: "A bustling metropolis blending tradition and technology.",
+                    image: "https://images.unsplash.com/photo-1516542076529-1ea3854896e0",
+                    link: "/tokyo"
+                },
+                {
+                    name: "Sydney",
+                    description: "Known for its Opera House and beautiful harbor.",
+                    image: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0",
+                    link: "/sydney"
+                },
+                {
+                    name: "Dubai",
+                    description: "A city of luxury, known for its skyscrapers and shopping.",
+                    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
+                    link: "/dubai"
+                }
+            ]; %>
+
+            <% cities.forEach(city => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="room-card" onclick="navigateToCity('<%= city.link %>')">
+                        <img class="room-image" src="<%= city.image %>" alt="<%= city.name %>">
+                        <div class="room-title"><%= city.name %></div>
+                        <p><%= city.description %></p>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>About Famous Cities</h5>
+                        <p>Discover the beauty and culture of the world's most iconic cities.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Contact Us</h5>
+                        <p><i class="fas fa-envelope me-2"></i>contact@famouscities.com</p>
+                        <p><i class="fas fa-phone me-2"></i>+123 456 7890</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Follow Us</h5>
+                        <div class="d-flex justify-content-center gap-3 mt-3">
+                            <a href="#" style="color: var(--teal); font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                            <a href="#" style="color: var(--teal); font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                            <a href="#" style="color: var(--teal); font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12 text-center">
+                        <p>© 2025 Famous Cities. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function navigateToCity(link) {
+            window.location.href = link;
+        }
+    </script>
+</body>
+</html>

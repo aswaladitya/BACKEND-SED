@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cozy Wave</title>
+    <link rel="stylesheet" href="/css/godfather.css">
+    <link rel="icon" href="/stuff/icon/home.svg">
+    <script src="/js/main.js" defer></script>
+    <style>
+        
+        #image-track {
+            display: flex;
+            gap: 5vmin;
+            position: absolute;
+            left: 105vmin;
+            top: 50%;
+            transform: translate(0%, -50%);
+            user-select: none;
+            transition: left 1s ease-in-out;
+
+        }
+
+        #image-track.move {
+            display: flex;
+            gap: 5vmin;
+            position: absolute;
+            left: max(10%, calc(100vw - 100%));
+            top: 50%;
+            transform: translate(0%, -50%);
+            user-select: none;
+        }
+
+        #image-track .image-container {
+            position: relative;
+            width: 50vmin;
+            height: 70vmin;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border-radius: 10px; 
+            border: 2px solid var(--gray);
+            animation: sick 2s ease-in-out infinite;
+            transition: background-color 0.3s ease-in-out, 
+                width 0.6s ease-in-out, 
+                
+        }
+
+        #image-track .image-container:hover {
+            transform: scale(1.2);
+            z-index: 10;
+            border: 0;
+            animation: none;
+        }
+
+        #image-track .image-container .image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 100% center;
+            transition: filter 0.3s;
+            border-radius: 10px; 
+            
+        }
+
+        #image-track .image-container:hover .image {
+            filter: blur(5px); 
+        }
+
+        #image-track .image-container .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: "Modern Antiqua", serif;
+            font-size: 1.5rem;
+            text-align: center;
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        #image-track .image-container:hover .overlay {
+            opacity: 1;
+        }
+        .headed {
+            position: absolute;
+            font-family: "Monoton", serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 25vmin;
+            color: var(--teal);
+            opacity: 1;
+            pointer-events: none;
+            transition: opacity 0.3s ease-out;            
+        }
+        .headed.dud{
+            opacity: 0.2 !important;
+        }
+        #cozy {
+            position: absolute;
+            top: 53%;
+            transform: translateY(-50%);
+            left: 10px;
+            color: var(--teal);
+            animation: colorSwitch 4.2s ease-in-out infinite;
+            letter-spacing: -6.5px;
+            line-height:1.2;
+            
+        }
+
+        #wave {
+            position: absolute;
+            top: 60%;
+            transform: translateY(-50%);
+            left: 15vmin;
+            color: var(--aqua);
+            animation: Colorswitch 4.2s ease-in-out infinite;
+            letter-spacing: -8px;
+            line-height: 1.2;
+        }
+
+        @keyframes colorSwitch {
+            0% {
+                color: var(--teal);
+            }
+            50% {
+                color: var(--aqua);
+            }
+            100% {
+                color: var(--teal);
+            }
+        }
+        @keyframes Colorswitch {
+            0% {
+                color: var(--aqua);
+            }
+            50% {
+                color: var(--teal);
+            }
+            100% {
+                color: var(--aqua);
+            }
+        }
+        @keyframes sick {
+            0% {
+                border: 2px solid var(--gray);
+            }
+            
+            50% {
+                border: 2px solid var(--teal);
+            }
+            
+            100% {
+                border: 2px solid var(--gray);
+            }
+        }
+        .no-move {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% center;
+            transition: filter 0.3s;
+            border-radius: 10px;
+        }
+
+        
+    
+
+    #login {
+    background-color: transparent;
+    max-height: 70vmin;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.6s ease-in-out,
+    background-color 0.3s ease-in-out;
+                
+    overflow: hidden;
+}
+#formTitle {
+    font-family: "Modern Antiqua", serif;
+    font-size: 2rem;
+    color: var(--teal);
+    margin-bottom: 1vmin;
+}
+.expanding:hover {
+    cursor: pointer;
+}
+#login img {
+    transition: opacity 0.2s ease-in, transform 0.2s ease-in;
+    position: absolute;
+}
+
+#login.expanding img {
+    opacity: 0;
+    transform: scale(0.9);
+    visibility: hidden;
+}
+
+
+#login.expanding {
+    padding: 40px;
+    max-width: 100vmin; 
+    max-height: 60vmin;
+    background-color: var(--black);  
+    width: 80vw;  
+    left: -100vmin; 
+    border: 2.5px solid var(--teal); 
+    border-radius: 1%; 
+}
+
+.hidden {
+    display: none;
+}
+
+label {
+    font-family: raleway, sans-serif;
+    color: var(--aqua);
+}
+
+#formTitle {
+    color: var(--aqua);
+}
+
+
+    </style>
+</head>
+<body>
+    <div id="cozy" class="headed">Cozy</div>
+    <div id="wave" class="headed"><br>Wave</div>
+    <div id="image-track" data-percentage="0">
+
+        <!-- without login -->
+        <div id="login" class="image-container">
+            <img class="image" src="/stuff/home/9a.jpg" draggable="false" />
+            <div class="overlay">Join the Cozy Wave</div>
+        </div>
+        <button id="closeForm" class="hidden"><h1>C</h1><h1>L</h1><h1>O</h1><h1>S</h1><h1>E</h1></button>
+        
+         <!-- quesn mark after login  -->
+        <!--div id="question" class="image-container">
+            <img class="image" src="/stuff/q.jpg" draggable="false" />
+            <div class="overlay">?</div>
+        </div-->
+        
+        <a href="/about">
+            <div class="image-container">
+                <img class="image" src="/stuff/home/0.jpg" draggable="false" />
+                <div class="overlay">Welcome to Cozy Wave</div>
+            </div>
+        </a>
+
+        <a href="/experience">
+            <div id="question" class="image-container">
+                <img class="image" src="/stuff/home/2.png" draggable="false" />
+                <div class="overlay">Escape to Paradise</div>
+            </div>
+        </a>
+
+        <!-- <a href="/resorts">
+            <div class="image-container">
+                <img class="image" src="/stuff/home/1.jpg" draggable="false" />
+                <div class="overlay">Relax in Style</div>
+            </div>
+        </a> -->
+        
+        <!-- <a href="/experience">
+            <div class="image-container">
+                <img class="image" src="/stuff/home/3.jpg" draggable="false" />
+                <div class="overlay">Create Unforgettable Memories</div>
+            </div>
+        </a> -->
+
+        
+        <!--
+        <div class="image-container">
+            <img class="image" src="/stuff/4.png" draggable="false" />
+            <div class="overlay",Rooms and Suites</div>
+        </div>
+        <div class="image-container">
+            <img class="image" src="/stuff/5.jpg" draggable="false" />
+            <div class="overlay">Memorable Stays</div>
+        </div>
+        <div class="image-container">
+            <img class="image" src="/stuff/6.jpg" draggable="false" />
+            <div class="overlay">Exquisite Dining</div>
+        </div>
+        <div class="image-container">
+            <img class="image" src="/stuff/7.jpg" draggable="false" />
+            <div class="overlay">Luxury Redefined</div>
+        </div>-->
+
+
+        <a href="/contact">
+        <div class="image-container">
+            <img class="no-move" src="/stuff/home/8.png" draggable="false" />
+            <div class="overlay">Let’s Connect</div>
+        </div>
+
+        <!-- logout  -->
+        <a href="/?log=false">
+        <div id="logout" class="image-container">
+            <img class="image" src="/stuff/home/9b.jpg" draggable="false" />
+            <div class="overlay">Leaving Already?</div>
+        </div>
+        </a>
+        
+    </div>
+
+    
+    
+</body>
+</html>
