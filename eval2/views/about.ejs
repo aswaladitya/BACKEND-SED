@@ -6,70 +6,440 @@
     <link rel="stylesheet" href="/css/godfather.css">
     <link rel="icon" href="/stuff/icon/library_books_24dp_14FFEC_FILL0_wght400_GRAD0_opsz24.svg">
     <title>About Us</title>
-    <script src="/js/about.js" defer></script>
     <style>
-        .scrolling-text-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -10;
-            pointer-events: none; 
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            white-space: nowrap;
-            overflow: hidden;
-        }
-        .scrolling-text-bg span {
-            animation: scroll-text 30s linear infinite;
-            display: inline-block;
-            margin: 0 2rem; 
-            color: var(--teal);
+        /* Define new color variables */
+        :root {
+            --vibrant-teal: #1A9D9E;
+            --glowing-cyan: #00E7FF;
+            --neutral-gray: #4A4A4A;
+            --accent-gold: #FFD700;
+            --soft-white: #E0E0E0;
         }
 
-       
+        /* Enable vertical scrolling on the page */
+        body {
+            overflow-y: auto;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, var(--black), #1a1a1a);
+            color: var(--neutral-gray);
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* Main container */
+        .about-container {
+            max-width: 90%;
+            margin: 2rem auto;
+            padding: 1rem;
+            color: var(--neutral-gray);
+            font-family: 'Raleway', sans-serif;
+        }
+
+        /* Header section */
+        .about-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .about-header h1 {
+            font-family: 'Monoton', serif;
+            font-size: 4rem;
+            color: var(--vibrant-teal);
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            text-shadow: 0 0 15px rgba(0, 231, 255, 0.7), 0 0 5px var(--glowing-cyan);
+        }
+
+        .about-header h1:hover {
+            color: var(--glowing-cyan);
+            text-shadow: 0 0 25px rgba(0, 231, 255, 0.9), 0 0 10px var(--glowing-cyan);
+        }
+
+        .about-header p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--neutral-gray);
+            opacity: 0.9;
+            letter-spacing: 1px;
+        }
+
+        /* Content sections */
+        .about-content {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(0, 231, 255, 0.2);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, max-height 0.5s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Specific styling for expandable sections (Our Story, Our Mission) */
+        .expandable {
+            max-height: 200px;
+        }
+
+        .expandable.expanded {
+            max-height: 600px;
+            overflow-y: auto;
+            box-shadow: 0 6px 25px rgba(0, 231, 255, 0.3);
+        }
+
+        /* Remove max-height constraint for non-expandable sections (Our Values) */
+        .non-expandable {
+            max-height: none;
+            overflow: visible;
+        }
+
+        .about-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(0, 231, 255, 0.3);
+        }
+
+        .about-content h2 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--vibrant-teal);
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--vibrant-teal), var(--glowing-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+            text-shadow: 0 0 5px rgba(0, 231, 255, 0.5);
+        }
+
+        .about-content:hover h2 {
+            transform: scale(1.05);
+            text-shadow: 0 0 15px rgba(0, 231, 255, 0.8);
+        }
+
+        /* Scrolling text container (visible on hover) */
+        .scrolling-text {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            display: none;
+        }
+
+        .expandable:hover .scrolling-text {
+            display: block;
+        }
+
+        .expandable:hover .static-text {
+            display: none;
+        }
+
+        .scrolling-text span {
+            display: inline-block;
+            animation: scroll-text 20s linear infinite;
+            color: var(--glowing-cyan);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0.9;
+            padding-left: 100%;
+        }
+
         @keyframes scroll-text {
             0% {
-                transform: translateX(100%);
+                transform: translateX(0);
             }
             100% {
                 transform: translateX(-100%);
             }
         }
 
-        .text-large {
-            font-size: 6rem;
-            opacity: 0.15;
+        /* Static text (visible when not hovering) */
+        .static-text {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            line-height: 1.8;
+            color: var(--soft-white);
+            letter-spacing: 0.5px;
         }
 
-        .text-medium {
-            font-size: 4rem;
-            opacity: 0.3;
+        /* Expanded content (visible when clicked) */
+        .expanded-content {
+            display: none;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            line-height: 2;
+            color: var(--soft-white);
+            letter-spacing: 0.5px;
+            padding: 1rem;
+            background: rgba(0, 231, 255, 0.1);
+            border-radius: 8px;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        .text-small {
-            font-size: 2rem;
-            opacity: 0.2;
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        
-        
+        .expandable.expanded .expanded-content {
+            display: block;
+        }
+
+        .expandable.expanded .static-text,
+        .expandable.expanded .scrolling-text {
+            display: none;
+        }
+
+        /* Values section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .value-card {
+            background: rgba(26, 157, 158, 0.15);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 231, 255, 0.2);
+        }
+
+        .value-card:hover {
+            background: rgba(0, 231, 255, 0.25);
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(0, 231, 255, 0.4);
+        }
+
+        .value-card h3 {
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--vibrant-teal);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(0, 231, 255, 0.5);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .value-card:hover h3 {
+            color: var(--accent-gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .value-card p {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--soft-white);
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .about-header h1 {
+                font-size: 2.5rem;
+            }
+            .about-header p {
+                font-size: 1.2rem;
+            }
+
+            .about-content h2 {
+                font-size: 1.8rem;
+            }
+            .static-text, .scrolling-text span, .expanded-content {
+                font-size: 1.1rem;
+            }
+
+            .expandable {
+                max-height: 160px;
+            }
+
+            .expandable.expanded {
+                max-height: 500px;
+            }
+
+            .about-content {
+                padding: 1.5rem;
+            }
+
+            .value-card h3 {
+                font-size: 1.2rem;
+            }
+            .value-card p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-header h1 {
+                font-size: 2rem;
+            }
+            .about-header p {
+                font-size: 1rem;
+            }
+
+            .about-content h2 {
+                font-size: 1.5rem;
+            }
+            .static-text, .scrolling-text span, .expanded-content {
+                font-size: 0.9rem;
+            }
+
+            .expandable {
+                max-height: 120px;
+            }
+
+            .expandable.expanded {
+                max-height: 400px;
+            }
+
+            .about-content {
+                padding: 1rem;
+            }
+
+            .value-card h3 {
+                font-size: 1rem;
+            }
+            .value-card p {
+                font-size: 0.9rem;
+            }
+        }
     </style>
+    <script nonce="<%= nonce %>">
+        // Ensure the script runs after the DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded, initializing click events for About page');
+
+            // Find all expandable boxes
+            const expandableBoxes = document.querySelectorAll('.expandable');
+            console.log('Found expandable boxes:', expandableBoxes.length);
+
+            if (expandableBoxes.length === 0) {
+                console.warn('No expandable boxes found. Check if the .expandable class is applied correctly.');
+                return;
+            }
+
+            // Add click event listeners to each expandable box
+            expandableBoxes.forEach(box => {
+                box.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    console.log('Box clicked:', box.querySelector('h2').textContent);
+                    const isExpanded = box.classList.contains('expanded');
+
+                    // Collapse all other boxes
+                    expandableBoxes.forEach(otherBox => {
+                        otherBox.classList.remove('expanded');
+                    });
+
+                    // Toggle the clicked box
+                    if (!isExpanded) {
+                        box.classList.add('expanded');
+                    }
+                });
+
+                // Prevent hover effects when expanded
+                box.addEventListener('mouseenter', () => {
+                    if (box.classList.contains('expanded')) {
+                        console.log('Box is expanded, disabling hover effects for:', box.querySelector('h2').textContent);
+                        const scrollingText = box.querySelector('.scrolling-text');
+                        const staticText = box.querySelector('.static-text');
+                        if (scrollingText) scrollingText.style.display = 'none';
+                        if (staticText) staticText.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
-
-    <div class="scrolling-text-bg"></div>
-    <div class="container mt-3">
+    <div class="about-container">
         <a href="/" class="back-link">
             Back
             <img src="/stuff/icon/undo_teal.svg" alt="Back Icon">
         </a>
+
+        <div class="about-header">
+            <% if (about) { %>
+                <h1><%= about.title %></h1>
+                <p>Learn more about our journey and what drives us.</p>
+            <% } else { %>
+                <h1>About Us</h1>
+                <p>Learn more about our journey and what drives us.</p>
+            <% } %>
+        </div>
+
+        <div class="about-content expandable">
+            <h2>Our Story</h2>
+            <% if (about) { %>
+                <p class="static-text"><%= about.descriptionTeaser %></p>
+                <div class="scrolling-text">
+                    <span><%= about.description %></span>
+                </div>
+                <div class="expanded-content">
+                    <%= about.description %>
+                </div>
+            <% } else { %>
+                <p class="static-text">Passionate about travel, we curate personalized journeys worldwide.</p>
+                <div class="scrolling-text">
+                    <span>We are a passionate team dedicated to creating unforgettable travel experiences. With years of expertise, we curate journeys that inspire and delight.</span>
+                </div>
+                <div class="expanded-content">
+                    We are a passionate team dedicated to creating unforgettable travel experiences. With years of expertise, we curate journeys that inspire and delight.
+                </div>
+            <% } %>
+        </div>
+
+        <div class="about-content expandable">
+            <h2>Our Mission</h2>
+            <% if (about) { %>
+                <p class="static-text"><%= about.missionTeaser %></p>
+                <div class="scrolling-text">
+                    <span><%= about.mission %></span>
+                </div>
+                <div class="expanded-content">
+                    <%= about.mission %>
+                </div>
+            <% } else { %>
+                <p class="static-text">Inspiring wanderlust with seamless, sustainable travel experiences.</p>
+                <div class="scrolling-text">
+                    <span>To inspire and empower travelers to explore the world with confidence, creating memories that last a lifetime.</span>
+                </div>
+                <div class="expanded-content">
+                    To inspire and empower travelers to explore the world with confidence, creating memories that last a lifetime.
+                </div>
+            <% } %>
+        </div>
+
+        <div class="about-content non-expandable">
+            <h2>Our Values</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <h3>Passion</h3>
+                    <p>We love what we do and are driven by a passion for travel and exploration.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Integrity</h3>
+                    <p>We believe in transparency and honesty in all our dealings.</p>
+                </div>
+                <div class="value-card">
+                    <h3>Excellence</h3>
+                    <p>We strive for the highest standards in every journey we curate.</p>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="bot">About</div>
-
-
 </body>
 </html>
